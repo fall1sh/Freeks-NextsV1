@@ -34,7 +34,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="mb-28 max-w-[53rem] scroll-mt-28 text-center sm:mb-40"
+      className="mb-28 max-w-[53rem] w-full px-4 scroll-mt-28 text-center sm:mb-40 mx-auto"
     >
       <div className="bg-emerald-400 absolute bottom-[-rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#183D3D]"></div>
 
@@ -43,77 +43,82 @@ export default function Skills() {
         <BurstBload2 />
       </div>
 
-      {/* First Row (scrolls left) */}
-      <div className="row-container mb-4">
-        <div className="scrolling-row left">
-          {[...row1, ...row1].map((skill, index) => {
-            const originalIndex = index % row1.length;
-            return (
-              <motion.div
-                key={`row1-${originalIndex}-${Math.floor(index/row1.length)}`}
-                onMouseOver={() => setHoverIndex(originalIndex)}
-                onMouseOut={() => setHoverIndex(-1)}
-                variants={fadeInAnimationVariants}
-                initial="initial"
-                whileInView="animate"
-                custom={originalIndex}
-                viewport={{ once: true }}
-                className="skill-box"
-              >
-                <div className={`skill-content ${
-                  hoverIndex === originalIndex 
-                    ? 'dark:hover:shadow-[15px_15px_0_0_#334155] hover:shadow-[15px_15px_0_0_#000000] scale-105' 
-                    : ''
-                }`}>
-                  <Image
-                    src={skill.imgUrl}
-
-                    width="192"
-                    height="192"
-                    quality="95"
-                    priority={true}
-                    className="md:w-16 w-6" alt={""}                  />
-                </div>
-              </motion.div>
-            );
-          })}
+      {/* Container with fixed width */}
+      <div className="w-full mx-auto">
+        {/* First Row (scrolls left) */}
+        <div className="row-container mb-4">
+          <div className="scrolling-row left">
+            {[...row1, ...row1].map((skill, index) => {
+              const originalIndex = index % row1.length;
+              return (
+                <motion.div
+                  key={`row1-${originalIndex}-${Math.floor(index/row1.length)}`}
+                  onMouseOver={() => setHoverIndex(originalIndex)}
+                  onMouseOut={() => setHoverIndex(-1)}
+                  variants={fadeInAnimationVariants}
+                  initial="initial"
+                  whileInView="animate"
+                  custom={originalIndex}
+                  viewport={{ once: true }}
+                  className="skill-box"
+                >
+                  <div className={`skill-content ${
+                    hoverIndex === originalIndex 
+                      ? 'dark:hover:shadow-[15px_15px_0_0_#334155] hover:shadow-[15px_15px_0_0_#000000] scale-105' 
+                      : ''
+                  }`}>
+                    <Image
+                      src={skill.imgUrl}
+                      alt={skill.name || "Skill icon"}
+                      width="192"
+                      height="192"
+                      quality="95"
+                      priority={true}
+                      className="md:w-16 w-8"
+                    />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      {/* Second Row (scrolls right) */}
-      <div className="row-container">
-        <div className="scrolling-row right">
-          {[...row2, ...row2].map((skill, index) => {
-            const originalIndex = index % row2.length;
-            return (
-              <motion.div
-                key={`row2-${originalIndex}-${Math.floor(index/row2.length)}`}
-                onMouseOver={() => setHoverIndex(originalIndex + row1.length)}
-                onMouseOut={() => setHoverIndex(-1)}
-                variants={fadeInAnimationVariants}
-                initial="initial"
-                whileInView="animate"
-                custom={originalIndex + row1.length}
-                viewport={{ once: true }}
-                className="skill-box"
-              >
-                <div className={`skill-content ${
-                  hoverIndex === originalIndex + row1.length
-                    ? 'dark:hover:shadow-[15px_15px_0_0_#334155] hover:shadow-[15px_15px_0_0_#000000] scale-105' 
-                    : ''
-                }`}>
-                  <Image
-                    src={skill.imgUrl}
-
-                    width="192"
-                    height="192"
-                    quality="95"
-                    priority={true}
-                    className="md:w-16 w-6" alt={""}                  />
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* Second Row (scrolls right) */}
+        <div className="row-container">
+          <div className="scrolling-row right">
+            {[...row2, ...row2].map((skill, index) => {
+              const originalIndex = index % row2.length;
+              return (
+                <motion.div
+                  key={`row2-${originalIndex}-${Math.floor(index/row2.length)}`}
+                  onMouseOver={() => setHoverIndex(originalIndex + row1.length)}
+                  onMouseOut={() => setHoverIndex(-1)}
+                  variants={fadeInAnimationVariants}
+                  initial="initial"
+                  whileInView="animate"
+                  custom={originalIndex + row1.length}
+                  viewport={{ once: true }}
+                  className="skill-box"
+                >
+                  <div className={`skill-content ${
+                    hoverIndex === originalIndex + row1.length
+                      ? 'dark:hover:shadow-[15px_15px_0_0_#334155] hover:shadow-[15px_15px_0_0_#000000] scale-105' 
+                      : ''
+                  }`}>
+                    <Image
+                      src={skill.imgUrl}
+                      alt={skill.name || "Skill icon"}
+                      width="192"
+                      height="192"
+                      quality="95"
+                      priority={true}
+                      className="md:w-16 w-8"
+                    />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -122,21 +127,24 @@ export default function Skills() {
           overflow: hidden;
           width: 100%;
           position: relative;
+          max-width: 53rem;
+          margin: 0 auto;
         }
         
         .scrolling-row {
           display: flex;
-          gap: 1.75rem; /* matches your gap-7 */
+          gap: 1rem;
           width: max-content;
           will-change: transform;
+          padding: 0 1rem;
         }
         
         .scrolling-row.left {
-          animation: scrollLeft 30s linear infinite;
+          animation: scrollLeft 40s linear infinite;
         }
         
         .scrolling-row.right {
-          animation: scrollRight 30s linear infinite;
+          animation: scrollRight 40s linear infinite;
         }
         
         .skill-box {
@@ -146,8 +154,8 @@ export default function Skills() {
         }
         
         .skill-content {
-          width: 70px;
-          height: 71px;
+          width: 80px;
+          height: 80px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -173,11 +181,33 @@ export default function Skills() {
           100% { transform: translateX(0); }
         }
         
+        @media (max-width: 640px) {
+          .scrolling-row {
+            gap: 0.75rem;
+          }
+          
+          .skill-content {
+            width: 70px;
+            height: 70px;
+            padding: 0.5rem;
+          }
+        }
+        
         @media (min-width: 768px) {
+          .scrolling-row {
+            gap: 1.75rem;
+            padding: 0;
+          }
+          
           .skill-content {
             width: 144px;
             height: 140px;
             padding: 1.25rem;
+          }
+          
+          .scrolling-row.left,
+          .scrolling-row.right {
+            animation-duration: 30s;
           }
         }
       `}</style>
