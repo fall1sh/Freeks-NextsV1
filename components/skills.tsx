@@ -69,13 +69,11 @@ export default function Skills() {
                   }`}>
                     <Image
                       src={skill.imgUrl}
-                      alt={skill.name || "Skill icon"}
                       width="192"
                       height="192"
                       quality="95"
                       priority={true}
-                      className="md:w-16 w-8"
-                    />
+                      className="md:w-16 w-8" alt={""}                    />
                   </div>
                 </motion.div>
               );
@@ -107,13 +105,11 @@ export default function Skills() {
                   }`}>
                     <Image
                       src={skill.imgUrl}
-                      alt={skill.name || "Skill icon"}
                       width="192"
                       height="192"
                       quality="95"
                       priority={true}
-                      className="md:w-16 w-8"
-                    />
+                      className="md:w-16 w-8" alt={""}                    />
                   </div>
                 </motion.div>
               );
